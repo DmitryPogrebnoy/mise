@@ -386,8 +386,11 @@ impl Backend for RubyPlugin {
         // is there a directory I can put rubygems_plugin.rb in that will be automatically loaded?
         let rubygems_plugin_path = self.rubygems_plugins_path(tv);
         let mut map = BTreeMap::new();
+        println!("MISE rubygems_plugin_path.exists()");
         if rubygems_plugin_path.exists() {
             let rubygems_plugin_path = rubygems_plugin_path.to_string_lossy().to_string();
+            println!("MISE_ENVS");
+            println!("{:#?}", env::PRISTINE_ENV);
             let rubylib = match env::PRISTINE_ENV.get("RUBYLIB") {
                 Some(rubylib) => format!("{}:{}", rubylib, rubygems_plugin_path),
                 None => rubygems_plugin_path,
