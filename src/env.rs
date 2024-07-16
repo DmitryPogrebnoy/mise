@@ -301,8 +301,23 @@ fn get_pristine_env(
     mise_diff: &EnvDiff,
     orig_env: HashMap<String, String>,
 ) -> HashMap<String, String> {
+    println!("MISE_ORIG_ENV");
+    println!("{:#?}", orig_env);
+    println!("MISE_DIFF");
+    println!("OLD");
+    println!("{:#?}", mise_diff.old);
+    println!("NEW");
+    println!("{:#?}", mise_diff.new);
+    println!("PATH");
+    println!("{:#?}", mise_diff.path);
     let patches = mise_diff.reverse().to_patches();
+    println!("MISE_ENVS_PATCHES");
+    println!("{:#?}", patches);
+
     let mut env = apply_patches(&orig_env, &patches);
+
+    println!("MISE_ENVS_AFTER_PATCHES");
+    println!("{:#?}", env);
 
     // get the current path as a vector
     let path = match env.get("PATH") {
